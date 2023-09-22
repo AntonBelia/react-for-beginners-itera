@@ -1,24 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import AppUseEffect from "./components/Effect/Counter";
+import Context from "./components/Context/Context.example";
+import Callback from "./components/Callback/Callback.example";
+import Custom from "./components/Custom/Custom.example";
 
 function App() {
+  const [state, setState] = useState({ isAdmin: false, userName: "Olga" });
+  const {isAdmin} = state;
+
+  const assignAdmin = () => {
+    setState({...state, isAdmin: true})
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+        <h1>Hello user, you is {isAdmin ? "Super Admin" : "a user"}</h1>
+        <button onClick={assignAdmin}>Assing admin</button>
+        <div>============================</div>
+        <AppUseEffect/>
+        <div>============================</div>
+        <Context/>
+        <div>============================</div>
+        <Callback />
+        <div>============================</div>
+        <Custom/>
     </div>
   );
 }
