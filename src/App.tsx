@@ -1,31 +1,23 @@
-import React, { useState } from "react";
-import "./App.css";
-import AppUseEffect from "./components/Effect/Counter";
-import Context from "./components/Context/Context.example";
-import Callback from "./components/Callback/Callback.example";
-import Custom from "./components/Custom/Custom.example";
+import React from "react";
+import { HeaderWithCounter } from "./HeaderWithCounter";
+import { Battlefield } from "./Battlefield";
+import { ResetBtn } from "./ResetBtn";
+import { useGameState } from "./state/useGameState";
+
+import './style.css'
 
 function App() {
-  const [state, setState] = useState({ isAdmin: false, userName: "Olga" });
-  const {isAdmin} = state;
+  const {turn, reset, matrix, fire, won} = useGameState();
 
-  const assignAdmin = () => {
-    setState({...state, isAdmin: true})
+  if (won) {
+    alert('moscow Down')
   }
-
+  
   return (
-    <div className="App">
-      
-        <h1>Hello user, you is {isAdmin ? "Super Admin" : "a user"}</h1>
-        <button onClick={assignAdmin}>Assing admin</button>
-        <div>============================</div>
-        <AppUseEffect/>
-        <div>============================</div>
-        <Context/>
-        <div>============================</div>
-        <Callback />
-        <div>============================</div>
-        <Custom/>
+    <div className="app" >
+      <HeaderWithCounter turn={turn}/>
+      <Battlefield matrix={matrix} onFire={fire}/>
+      <ResetBtn reset={reset}/>
     </div>
   );
 }
