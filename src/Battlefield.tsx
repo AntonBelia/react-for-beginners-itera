@@ -12,23 +12,23 @@ type CellProps = {
 	y: number;
 };
 
-enum cellStateMapProps {
-	WATER,
-	SHIP,
-	CHECKED_WATER,
-	CHECKED_SHIP
+interface cellStateMapProps {
+	0: string,
+	1: string,
+	2: string,
+	3: string
 }
 
-enum cellStateMap  {
-	WATER = '',
-	SHIP = '',
-	CHECKED_WATER = '🌊',
-	CHECKED_SHIP = '🔥'
+const cellStateMap: cellStateMapProps = {
+	[WATER]: '',
+	[SHIP]: '',
+	[CHECKED_WATER]: '🌊',
+	[CHECKED_SHIP]: '🔥'
 }
 
 const Cell = ({handlerClick, value, x, y}: CellProps) => {
 	return <button className="cell" onClick={() => handlerClick(y, x)}>
-		{cellStateMap[value]}
+		{cellStateMap[value as keyof cellStateMapProps]}
 	</button>
 }
 
